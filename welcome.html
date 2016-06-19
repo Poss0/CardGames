@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="welcomeApp">
+ <head>
+  <meta content="charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <script type="text/javascript" src="angular.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <title>Welcome!</title>
+ </head>
+ <body ng-controller="cardDisplayCtrl as card">
+  <div id="play" ng-click="card.distribution(); disp = 0" ng-show="disp" ng-init="disp = 1">
+   Play
+   <img src="img/Play.jpg" id="playImg"/>
+  </div>
+  <div id="left" ng-hide="disp">
+   Alpha<br>
+   <img class="cardImgSide" ng-repeat="card in card.cards" ng-show="card.owner === 'alpha'" src='img/dos2.jpg'/>
+  </div>
+  <div id="right" ng-hide="disp">
+   Gamma<br>
+   <img class="cardImgSide" ng-repeat="card in card.cards" ng-show="card.owner === 'gamma'" src='img/dos2.jpg'/>
+  </div>
+  <div id="top" ng-hide="disp">
+   Beta<br>
+   <img class="cardImgTop" ng-repeat="card in card.cards" ng-show="card.owner === 'beta'" src='img/dos.jpg'/>
+  </div>
+  <div id="center" ng-hide="disp">
+   <div ng-click="card.getLatest()">
+   <img class="cardImgBig" ng-repeat="card in card.cards" ng-show="card.owner === 'latest'" ng-src="{{card.img}}"/>
+   </div>
+   <div ng-click="card.getFromStack()">
+   <img class="cardImgBig" ng-show="card.cardsInStack() != 0" src='img/dos.jpg'/>
+   {{card.cardsInStack()}}
+   </div>
+  </div>
+  <div id="player" ng-hide="disp">
+   Player<br>
+   <img class="cardImgBig" ng-repeat="card in card.cards" ng-show="card.owner === 'player'" ng-src="{{card.img}}"/>
+  </div>
+ </body>
+</html>
